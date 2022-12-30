@@ -127,6 +127,13 @@ def display_word(word, correct_letters):
             print('_', end='')
     print()
 
+def is_guessed(word, correct_letters):
+    guessed_letters = [True for letter in word if letter in correct_letters]
+    if guessed_letters.count(True) == len(word):
+        return True
+    else:
+        return False
+
 
 def main():
     while True:
@@ -138,7 +145,7 @@ def main():
             display_hangman(wrong_guesses)
             display_word(word, correct_letters)
             display_available_letters(guessed_letters)
-            if len(correct_letters) == len(word):
+            if is_guessed(word, correct_letters):
                 print('YOU WON!')
                 break
             elif wrong_guesses == 10:
@@ -150,10 +157,10 @@ def main():
                 guess = input('letter: ')
             if guess not in guessed_letters:
                 guessed_letters.append(guess)
-            if guess in word:
-                correct_letters.append(guess)
-            else:
-                wrong_guesses += 1
+                if guess in word:
+                    correct_letters.append(guess)
+                else:
+                    wrong_guesses += 1
 
         again = input('Do you want to play again? (Y/N): ')
         if again.lower() == 'n':
