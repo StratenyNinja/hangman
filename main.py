@@ -1,7 +1,7 @@
 import random
 
 
-WORDS = ['dog', 'cat', 'hangman']
+WORDS = ['enola holmes']
 
 HANGMAN = {
     0:
@@ -119,15 +119,16 @@ def display_available_letters(guessed_letters):
 
 def display_word(word, correct_letters):
     for letter in word:
-        if ' ' in word:
-            print(' ', end='')
         if letter in correct_letters:
             print(letter.upper(), end='')
+        elif letter == ' ':
+            print(' ', end='')
         else:
             print('_', end='')
     print()
 
 def is_guessed(word, correct_letters):
+    word = word.replace(' ', '')
     guessed_letters = [True for letter in word if letter in correct_letters]
     if guessed_letters.count(True) == len(word):
         return True
