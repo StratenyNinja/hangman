@@ -1,7 +1,6 @@
 import random
+from words import THEMES, WORDS
 
-
-WORDS = ['enola holmes']
 
 HANGMAN = {
     0:
@@ -106,6 +105,14 @@ HANGMAN = {
 }
 
 
+def display_themes(themes):
+    print('Choose a theme')
+    for index, theme in enumerate(themes):
+        if index % 5 == 0 and index != 0:
+            print()
+        print(f'{index+1}. {theme}', end=' ')
+    print()
+
 def display_hangman(wrong_guesses):
     print(HANGMAN[wrong_guesses])
 
@@ -138,10 +145,12 @@ def is_guessed(word, correct_letters):
 
 def main():
     while True:
-        word = random.choice(WORDS)
         guessed_letters = []
         correct_letters = []
         wrong_guesses = 0
+        display_themes(THEMES)
+        theme = int(input('theme (number): '))
+        word = random.choice(WORDS[theme-1])
         while True:
             display_hangman(wrong_guesses)
             display_word(word, correct_letters)
