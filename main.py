@@ -148,16 +148,35 @@ def is_guessed(word, correct_letters):
     else:
         return False
 
+def find_theme(theme):
+    try:
+        index = int(theme)
+        if index < len(THEMES):
+            return index - 1
+        else:
+            return 'err'
+    except ValueError:
+        theme = theme.upper()
+        if theme in THEMES:
+            return THEMES.index(theme)
+        else:
+            return 'err'
 
 def main():
     while True:
         guessed_letters = []
         correct_letters = []
         wrong_guesses = 0
-        display_themes(THEMES)
-        theme = int(input())
-        word = random.choice(WORDS[theme-1])
-        refresh_screen()
+        while True:
+            display_themes(THEMES)
+            theme = input()
+            theme = find_theme(theme)
+            refresh_screen()
+            if theme == 'err':
+                print('Theme does not exist.')
+            else:
+                word = random.choice(WORDS[theme])
+                break
         while True:
             display_hangman(wrong_guesses)
             display_word(word, correct_letters)
