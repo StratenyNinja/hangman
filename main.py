@@ -1,3 +1,4 @@
+import os
 import random
 from words import THEMES, WORDS
 
@@ -105,26 +106,22 @@ HANGMAN = {
 }
 
 
+def refresh_screen():
+    os.system('cls')
+
 def display_themes(themes):
     print('Choose a theme')
     for index, theme in enumerate(themes):
-        if index % 5 == 0 and index != 0:
+        if index % 5 == 0 and index > 0:
             print()
-        print(f'{index+1}. {theme}', end=' ')
+        print(f' {index+1}. {theme}', end='')
     print()
 
 def display_hangman(wrong_guesses):
     print(HANGMAN[wrong_guesses])
 
-def display_available_letters(guessed_letters):
-    for letter in 'abcdefghijklmnopqrstuvwxyz':
-        if letter in guessed_letters:
-            print('_', end=' ')
-        else:
-            print(letter.upper(), end=' ')
-    print()
-
 def display_word(word, correct_letters):
+    print(end=' ')
     for letter in word:
         if letter in correct_letters:
             print(letter.upper(), end='')
@@ -132,6 +129,15 @@ def display_word(word, correct_letters):
             print(' ', end='')
         else:
             print('_', end='')
+    print()
+
+def display_available_letters(guessed_letters):
+    print(end=' ')
+    for letter in 'abcdefghijklmnopqrstuvwxyz':
+        if letter in guessed_letters:
+            print('_', end=' ')
+        else:
+            print(letter.upper(), end=' ')
     print()
 
 def is_guessed(word, correct_letters):
@@ -149,8 +155,9 @@ def main():
         correct_letters = []
         wrong_guesses = 0
         display_themes(THEMES)
-        theme = int(input('theme (number): '))
+        theme = int(input())
         word = random.choice(WORDS[theme-1])
+        refresh_screen()
         while True:
             display_hangman(wrong_guesses)
             display_word(word, correct_letters)
@@ -159,9 +166,7 @@ def main():
                 print('YOU WON!')
                 break
             elif wrong_guesses == 10:
-                display_hangman(wrong_guesses)
                 print('YOU LOST!')
-                print('The word was', word.upper())
                 break
             else:
                 guess = input('letter: ')
@@ -171,7 +176,9 @@ def main():
                     correct_letters.append(guess)
                 else:
                     wrong_guesses += 1
+            refresh_screen()
 
+        print('The word was', word.upper())
         again = input('Do you want to play again? (Y/N): ')
         if again.lower() == 'n':
             break
