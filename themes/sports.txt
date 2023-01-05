@@ -1,0 +1,10 @@
+football
+basketball
+hockey
+badminton
+tennis
+cricket
+table tennis
+volleyball
+baseball
+golf

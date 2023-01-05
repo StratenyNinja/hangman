@@ -1,0 +1,12 @@
+head
+arm
+hand
+eye
+nose
+ear
+mouth
+hair
+elbow
+wrist
+finger
+lips

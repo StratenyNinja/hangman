@@ -1,0 +1,14 @@
+dog
+cat
+goat
+duck
+fish
+shark
+whale
+cow
+giraffe
+lizard
+spider
+bird
+pigeon
+frog

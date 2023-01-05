@@ -1,0 +1,25 @@
+white
+black
+red
+yellow
+green
+blue
+purple
+orange
+brown
+gray
+turquoise
+magenta
+olive
+maroon
+cream
+bronze
+tan
+teal
+mustard
+navy blue
+lavender
+gold
+pink
+silver
+cyan

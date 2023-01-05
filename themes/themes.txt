@@ -1,0 +1,5 @@
+animals
+body
+sports
+colors
+countries
