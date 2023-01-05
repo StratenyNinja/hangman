@@ -1,8 +1,9 @@
 import os
 import random
-from words import THEMES, WORDS
+import themes
+import words
 
-
+THEMES = themes.get()
 HANGMAN = {
     0:
 '''
@@ -109,14 +110,6 @@ HANGMAN = {
 def refresh_screen():
     os.system('cls')
 
-def display_themes(themes):
-    print('Choose a theme')
-    for index, theme in enumerate(themes):
-        if index % 5 == 0 and index > 0:
-            print()
-        print(f' {index+1}. {theme}', end='')
-    print()
-
 def display_hangman(wrong_guesses):
     print(HANGMAN[wrong_guesses])
 
@@ -148,36 +141,24 @@ def is_guessed(word, correct_letters):
     else:
         return False
 
-def find_theme(theme):
-    try:
-        index = int(theme)
-        if index < len(THEMES):
-            return index - 1
-        else:
-            return 'err'
-    except ValueError:
-        theme = theme.upper()
-        if theme in THEMES:
-            return THEMES.index(theme)
-        else:
-            return 'err'
-
 def main():
     while True:
         guessed_letters = []
         correct_letters = []
         wrong_guesses = 0
         while True:
-            display_themes(THEMES)
+            themes.display(THEMES)
             theme = input()
-            theme = find_theme(theme)
+            theme = themes.find(theme)
             refresh_screen()
             if theme == 'err':
                 print('Theme does not exist.')
             else:
-                word = random.choice(WORDS[theme])
+                WORDS = words.get(theme)
+                word = random.choice(WORDS)
                 break
         while True:
+            print(THEMES[theme].upper())
             display_hangman(wrong_guesses)
             display_word(word, correct_letters)
             display_available_letters(guessed_letters)
